@@ -1,0 +1,199 @@
+<html lang="fr">
+
+<head>
+    <meta name="veiwport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+    <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="vendors/font-awesome.min.css">
+    <link rel="stylesheet" href="StyleHome.css">
+    <link rel="stylesheet" href="insertpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/all.min.css">
+    <link rel="stylesheet" href="navopr.css">
+
+    <title>Insertion Page</title>
+</head>
+
+<body>
+    <ul class="menu">
+        <li><a class="textmenu" href="/" class="active">Accueil</a></li>
+        <li><a class="textmenu" id="EMPL" href="/operation"> Les Employés</a></li>
+        <li><a class="textmenu" href="/hist">Historique Des Missions</a></li>
+        <li><a class="textmenu" href="/insert">Retourner</a></li>
+        <li class="slider"></li>
+    </ul>
+
+
+
+    <section class="msg-data">
+
+    </section>
+
+
+    <section class="table-pos">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Destination</th>
+                            <th>Distance</th>
+                            <th>date_depart</th>
+                            <th>date_retour</th>
+                            <th colspan="1">View</th>
+                        </tr>
+                    </thead>
+                    <% data.forEach(function(el) { %>
+                    <tr>
+                        <td><%= el.idmission %></td>
+                        <td><%= el.nom  %></td>
+                        <td><%= el.prenom %></td>
+                        <td><%= el.destination %></td>
+                        <td><%= el.distance %></td>
+                        <td><%= el.date_depart %></td>
+                        <td><%= el.date_retour %></td>
+                        <td>
+                            <button type="button" name="dia" id="viewdia" onclick="View(this)"
+                                class="btn btn-info editbtn">View</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </table>
+                <!--  -->
+
+                <div class="modal fade" id="View" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">View Mission</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <input type="hidden" name="id" id="cID">
+                          <div class="col-md-6">
+                            <label>Nom :</label>
+                            <input type="text" name="name" id="cNAME" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-6">
+                            <label>Prenom :</label>
+                            <input type="text" name="prenom" id="cSURN" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-9">
+                            <label>GRADE:</label>
+                            <input type="text" name="grade" id="cGRADE" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-3">
+                            <label>GRADE ID:</label>
+                            <input type="text" name="gradeid" id="cGRADE_id" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-9">
+                            <label>CCP N:</label>
+                            <input type="number" name="ccp" id="cCCP" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-3">
+                            <label>Clé :</label>
+                            <input type="number" name="key" id="cKEY" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-12">
+                            <label>Distination:</label>
+                            <input type="text" name="distination" id="cdisID" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-6">
+                            <label>Date de depart:</label>
+                            <input type="text" name="date_depart" id="cdate_depart" class="form-control" readonly>
+                          </div>
+                          <div class="col-md-6">
+                            <label>Date de retour:</label>
+                            <input type="textD" name="date_retour" id="cdate_retour" class="form-control" readonly>
+                          </div>
+      
+      
+      
+      
+                          <div class="col-md-12">
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- </form> -->
+                  </div>
+                </div>
+              </div>
+
+                <!-- #################################################################################################################### --
+                <!-- #################################################################################################################### -->
+
+    </section>
+       <script>
+
+            var data_C = []
+<% for (let i = 0; i< data.length ; i++) { %>
+    var id = "<%= data[i].id %>"
+    var nom = "<%= data[i].nom %>"
+    var prenom  = "<%= data[i].prenom%>"
+    var grade = "<%=data[i].grade%>"
+    var grade_id = "<%= data[i].grade_id %>"
+    var ccp = "<%= data[i].ccp %>"
+    var cle = "<%= data[i].cle %>"
+    var idmission = "<%= data[i].idmission %>"
+    var date_depart = "<%= data[i].date_depart %>"
+    var date_retour = "<%= data[i].date_retour %>"
+    var heure_depart = "<%= data[i].heure_depart %>"
+    var heure_retour = "<%= data[i].heure_retour %>"
+    var distance = "<%= data[i].distance %>"
+    var destination = "<%= data[i].destination %>"
+
+var obj = {
+    id,nom,prenom,grade,grade_id,ccp,cle,idmission,date_depart,date_retour,heure_depart,heure_retour,distance,destination
+}
+
+data_C.push(obj)
+
+
+<% } %>
+
+function View(tr) {
+    td = $(tr).closest('tr')[0]
+      id = td.getElementsByTagName('td')[0].textContent
+      let obj = {
+        id
+      }
+      let objet = data_C.filter(el => {
+          return el.idmission.toString() == obj.id
+      })
+      $('#View').modal('show');
+$("#cNAME").val(objet[0].nom)
+$("#cSURN").val(objet[0].prenom)
+$("#cGRADE").val(objet[0].grade)
+$("#cGRADE_id").val(objet[0].grade_id)
+$("#cCCP").val(objet[0].ccp)
+$("#cKEY").val(objet[0].cle)
+$("#cdisID").val(objet[0].destination)
+$("#cdate_depart").val(objet[0].date_depart + "T" + objet[0].heure_depart)
+$("#cdate_retour").val(objet[0].date_retour + "T" + objet[0].heure_retour)
+
+
+console.log(objet)
+    
+}
+
+        </script>
+
+<script src="vendors/jquery-3.5.1.min.js"></script>
+<script src="vendors/bootstrap.js"></script>
+<script src="main.js"></script>
+</body>

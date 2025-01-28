@@ -1,0 +1,121 @@
+.content-box {
+    padding-top: 150px;
+    padding-bottom: 155px;
+    box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+}
+
+.content-box .container .row .box {
+    position: relative;
+    width: calc(400px - 30px);
+    height: calc(360px - 30px);
+    background: #000;
+    float: left;
+    margin: 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.content-box .container .row .box .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.content-box .container .row .box:hover .icon {
+    top: 20px;
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.content-box .container .row .box .icon .fa {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    transition: 0.5s;
+    color: #fff;
+}
+
+.content-box .container .row .box:hover .icon .fa {
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+
+.content-box .container .row .box .content {
+    position: absolute;
+    top: 100%;
+    margin-right: 15px;
+    height: calc(100%-100px);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.content-box .container .row .box:hover .content {
+    top: 100px;
+    opacity: 1;
+
+}
+
+.content-box .container .row .box .content h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.content-box .container .row .box .content p {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.content-box .container .row .box .content .btn {
+    margin-top: 5px;
+}
+
+.content-box .container .row .box:nth-child(1) .icon {
+    background: #319635;
+}
+
+.content-box .container .row .box:nth-child(1) {
+    background: #4caf50;
+}
+
+.content-box .container .row .box:nth-child(2) .icon {
+    background: #d03852;
+}
+
+.content-box .container .row .box:nth-child(2) {
+    background: #f54967;
+}
+
+.content-box .container .row .box:nth-child(3) .icon {
+    background: #23798e;
+}
+
+.content-box .container .row .box:nth-child(3) {
+    background: #328fa5;
+}
+
+.content-box .container {
+    padding-left: 30px;
+
+}
+
+.content-box {
+    background: #dd2476;
+    background: linear-gradient(to bottom,
+            #495374, #01060f);
+}
