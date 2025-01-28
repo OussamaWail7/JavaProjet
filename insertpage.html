@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    document.getElementsByTagName("html")[0].className += " js";
+  </script>
+  <link rel="stylesheet" href="vendors/bootstrap.css">
+  <link rel="stylesheet" href="vendors/font-awesome.min.css">
+  <link rel="stylesheet" href="StyleMenu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/all.min.css">
+  <link rel="stylesheet" href="stylenav.css">
+  <title>3D Rotating Navigation | CodyHouse</title>
+</head>
+
+<body>
+  <header class="cd-header container flex justify-between items-center">
+    <a href="#0" class="cd-logo">
+
+    </a>
+
+    <a href="#cd-3d-nav" class="cd-header__nav-trigger" aria-label="Toggle menu">
+      <span aria-hidden="true"></span>
+    </a>
+  </header>
+
+  <main class="cd-main">
+    <section class="content-box">
+      <div class="nav-point">
+        <div class="container">
+          <div class="row text-center">
+            <div class="box col-md-5 col-sm-12 ">
+              <a href="/operation">
+                <div class="icon"><i class="fa fas fa-address-card" aria-hidden="true"></i></div>
+              </a>
+              <div class="content">
+                <h3>Les Employées</h3>
+                <p>Les salariés du secteur privé et les agents de la fonction publique sont parfois amenés à avancer des
+                  frais dans le cadre de missions professionnelles </p>
+                <a href="/operation">
+                  <button class="btn btn-outline-secondary">Treat</button>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="box col-md-5 col-sm-12">
+              <a href="/hist">
+                <div class="icon"><i class="fa fas fa-hourglass-half" aria-hidden="true"></i></div>
+              </a>
+              <div class="content">
+                <h3>Historical</h3>
+                <p>My paragraph here , i will say how it work or how the user will treat with the data tables and this
+                  text is just a test paragraph</p>
+                <a href="/hist">
+                  <button class="btn btn-outline-secondary">History</button>
+                </a>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <nav class="cd-3d-nav js-cd-3d-nav" id="cd-3d-nav">
+    <ul class="cd-3d-nav__list">
+      <li class="cd-3d-nav__item cd-3d-nav__item--selected">
+        <a href="/">
+          <div class=" icon" style="padding-bottom: 31px; padding-right: 37px;"><i class="fa fa-home fa-2x"
+              style="margin-bottom: 10px;" aria-hidden="true"></i></div>
+          <span>Accueil</span>
+        </a>
+      </li>
+
+      <li class="cd-3d-nav__item">
+        <a href="/operation">
+          <div class="icon" style="padding-bottom: 31px; padding-right: 45px;"><i class="fa fa-address-card fa-2x"
+              aria-hidden="true"></i></div>
+          <span>Employées</span>
+        </a>
+      </li>
+
+      <li class="cd-3d-nav__item">
+        <a href="/hist">
+          <div class="icon" style="padding-bottom: 31px; padding-right: 39px;"><i class="fa fa-history fa-2x"
+              aria-hidden="true"></i></div>
+          <span>Historique </span>
+        </a>
+      </li>
+
+      <li class="cd-3d-nav__item">
+        <a href="/information">
+          <div class="icon" style="padding-bottom: 31px; padding-right: 33px;"><i class="fa fa-user-secret fa-2x"
+              aria-hidden="true"></i></div>
+          <span>Information</span>
+        </a>
+      </li>
+
+      <li class="cd-3d-nav__item">
+        <a onclick="deconnecter()" href="#0">
+          <div class="icon" style="padding-bottom: 31px; padding-right: 33px;"><i class="fa fa-sign-out fa-2x"
+              aria-hidden="true"></i></div>
+          <span>Déconnecter</span>
+        </a>
+      </li>
+    </ul>
+
+    <span class="cd-3d-nav__marker cd-3d-nav__marker--col-1" aria-hidden="true"></span>
+  </nav>
+
+
+
+
+  <script src="utilnav.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="mainnav.js"></script>
+  <script src="vendors/jquery-3.5.1.min.js"></script>
+  <script src="vendors/bootstrap.js"></script>
+  <script>
+    function deconnecter() {
+      document.cookie = "session=";
+      location.reload()
+    }
+  </script>
+
+</body>
+
+</html>

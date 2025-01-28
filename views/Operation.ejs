@@ -1,0 +1,702 @@
+<html lang="fr">
+
+<head>
+  <meta name="veiwport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="vendors/bootstrap.css">
+
+  <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="vendors/font-awesome.min.css">
+  <link rel="stylesheet" href="StyleHome.css">
+  <link rel="stylesheet" href="insertpage.css">
+  <link rel="stylesheet" href="navopr.css">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/all.min.css">
+  <title>Insertion Page</title>
+</head>
+
+<body>
+
+  <ul class="menu">
+    <li><a class="textmenu" href="/" class="active">Accueil</a></li>
+    <li><a class="textmenu" id="EMPL" href="/operation"> Les Employés</a></li>
+    <li><a class="textmenu" href="/hist">Historique Des Missions</a></li>
+    <li><a class="textmenu" href="/insert">Retourner</a></li>
+    <li class="slider"></li>
+  </ul>
+
+
+  <section class="msg-data">
+
+  </section>
+
+
+  <section class="table-pos">
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prenom</th>
+              <th>Grade</th>
+              <th>Grade_ID</th>
+              <th>CCP N°</th>
+              <th>Clé</th>
+              <th colspan="1">Action</th>
+              <th colspan="3">Mission</th>
+            </tr>
+          </thead>
+          <% data.forEach(function(el) { %>
+          <tr>
+            <td><%= el.id %></td>
+            <td><%= el.nom  %></td>
+            <td><%= el.prenom %></td>
+            <td><%= el.grade %></td>
+            <td><%= el.grade_id %></td>
+            <td><%= el.ccp %></td>
+            <td><%= el.cle %></td>
+            <td>
+              <button type="button" name="add" id="addid" class="btn btn-info editbtn">Edit</button>
+              <a onclick="del(this)" class="btn btn-danger">Supprimer</a>
+            </td>
+            <td class="mission">
+              <button type="button" name="msadd" id="msaddid" class="btn btn-outline-success addmsbtn">Ajouter
+                Mission</button>
+              <button type="button" name="tel" id="tel" onclick="telecharger(this)"
+                class="btn btn-outline-success">Telecharger</button>
+            </td>
+          </tr>
+          <% }) %>
+        </table>
+        <!-- ###############################################################################################################################################-->
+        <!--Insert Modal -->
+        <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Insertion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label>Nom :</label>
+                <input type="text" name="name" class="form-control" placeholder="Entrer le nom" required>
+
+                <label>Prenom :</label>
+                <input type="text" name="prenom" class="form-control" placeholder="Entre le prenom" required>
+
+                <label>Grade : </label>
+                <select id="grade_s" name="grade" required>
+                  <option value="" selected="selected" disabled="true"> Selectioner un grade </option>
+                  <option value="DIRECTRICE | 16"> DIRECTRICE </option>
+                  <option value="S DIR UNITE | 16"> S DIR UNITE </option>
+                  <option value="VEREFICATEUR | 16"> VEREFICATEUR </option>
+                  <option value="INGENIEUR D ETAT | 16"> INGENIEUR D'ETAT </option>
+                  <option value="CHEF DEPT UNITE | 16"> CHEF DEPT UNITE </option>
+                  <option value="CHEF ETAB C3 | 16"> CHEF ETAB C3 </option>
+                  <option value="CHEF ETAB | 16"> CHEF ETAB </option>
+                  <option value="CHEF ETAB | 16"> CHARGE ETUD </option>
+                  <option value="TECH | 15"> TECH </option>
+                  <option value="BRIGUADIER | 15"> BRIGUADIER </option>
+                  <option value="MAGASINIE | 15"> MAGASINIE </option>
+                  <option value="CAISSIER | 15"> CAISSIER </option>
+                  <option value="PCDMV N0 | 15"> PCDMV N0 </option>
+                  <option value="PCDMV N1 | 15"> PCDMV N1 </option>
+                  <option value="FACDOM | 15"> FACDOM </option>
+                  <option value="CONVOYEUR N1 | 15"> CONVOYEUR N1 </option>
+                  <option value="FACTEUR | 15"> FACTEUR </option>
+                  <option value="CHAUFFEUR | 15"> CHAUFFEUR </option>
+                  <option value="CHAUF DIR N1 | 15"> CHAUF DIR N1 </option>
+                  <option value="AG NET | 15"> AG NET </option>
+                </select>
+
+                <label>CCP N:</label>
+                <input type="number" name="ccp" class="form-control" placeholder="Entrer le ccp" required>
+
+                <label>Clé :</label>
+                <input type="number" name="key" min="0" max="99" class="form-control" placeholder="Entrer la clé"
+                  required>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" name="save" onclick="save()" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- #################################################################################################################### -->
+        <!-- ###############################################################################################################################################-->
+        <!-- EDIT Modal -->
+        <div class="modal fade" id="EDITUSER" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <input type="hidden" name="id" id="fID">
+
+                <label>Nom :</label>
+                <input type="text" name="name" id="fNAME" class="form-control" placeholder="Entrer le nom" required>
+
+                <label>Prenom :</label>
+                <input type="text" name="prenom" id="fSURN" class="form-control" placeholder="Entre le prenom" required>
+
+                <label for="grade_s">Grade : </label>
+                <select id="grade_s" name="grade" required>
+                  <option value="" selected="selected" disabled="true"> Selectioner un grade </option>
+                  <option value="DIRECTRICE | 16"> DIRECTRICE </option>
+                  <option value="S DIR UNITE | 16"> S DIR UNITE </option>
+                  <option value="VEREFICATEUR | 16"> VEREFICATEUR </option>
+                  <option value="INGENIEUR D ETAT | 16"> INGENIEUR D'ETAT </option>
+                  <option value="CHEF DEPT UNITE | 16"> CHEF DEPT UNITE </option>
+                  <option value="CHEF ETAB C3 | 16"> CHEF ETAB C3 </option>
+                  <option value="CHEF ETAB | 16"> CHEF ETAB </option>
+                  <option value="CHEF ETAB | 16"> CHARGE ETUD </option>
+                  <option value="TECH | 15"> TECH </option>
+                  <option value="BRIGUADIER | 15"> BRIGUADIER </option>
+                  <option value="MAGASINIE | 15"> MAGASINIE </option>
+                  <option value="CAISSIER | 15"> CAISSIER </option>
+                  <option value="PCDMV N0 | 15"> PCDMV N0 </option>
+                  <option value="PCDMV N1 | 15"> PCDMV N1 </option>
+                  <option value="FACDOM | 15"> FACDOM </option>
+                  <option value="CONVOYEUR N1 | 15"> CONVOYEUR N1 </option>
+                  <option value="FACTEUR | 15"> FACTEUR </option>
+                  <option value="CHAUFFEUR | 15"> CHAUFFEUR </option>
+                  <option value="CHAUF DIR N1 | 15"> CHAUF DIR N1 </option>
+                  <option value="AG NET | 15"> AG NET </option>
+                </select>
+
+                <label>Grade_ID:</label>
+                <input type="number" name="grade_id" id="fgrade_id" class="form-control" placeholder="Entrer le ccp"
+                  readonly>
+
+                <label>CCP N:</label>
+                <input type="number" name="ccp" id="fCCP" class="form-control" placeholder="Entrer le ccp" required>
+
+                <label>Clé :</label>
+                <input type="number" name="key" min="0" max="99" maxlength="3" id="fKEY" class="form-control"
+                  placeholder="Entrer la clé" required>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" onclick="edit()" name="update" class="btn btn-primary">Edit</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- #################################################################################################################### -->
+        <div class="modal fade" id="ADDMS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="submit-button">
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <input type="hidden" name="id" id="aID">
+                      <div class="col-md-6">
+                        <label>Nom :</label>
+                        <input type="text" name="name" id="aNAME" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Prenom :</label>
+                        <input type="text" name="prenom" id="aSURN" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-9">
+                        <label>GRADE:</label>
+                        <input type="text" name="grade" id="aGRADE" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-3">
+                        <label>GRADE ID:</label>
+                        <input type="text" name="gradeid" id="aGRADE_id" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-9">
+                        <label>CCP N:</label>
+                        <input type="number" name="ccp" id="aCCP" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-3">
+                        <label>Clé :</label>
+                        <input type="number" name="key" id="aKEY" class="form-control" readonly>
+                      </div>
+                      <div class="col-md-12">
+                        <label>Distination :</label>
+                        <select id="disID" name="distination" required>
+                          <option value="" selected="selected" disabled="true"> Selectioner la Distination </option>
+                          <option value="Alger | 450">Alger</option>
+                          <option value="Ain el Beida | 55">Ain el beida</option>
+                          <option value="Elhamma | 12">Elhamma</option>
+                          <option value="Batna | 103">Batna</option>
+                          <option value="Annaba | 345">Annaba</option>
+                          <option value="Setif | 223">Setif</option>
+                          <option value="Metirchou | 52">Metirchou</option>
+                          <option value="kais | 52">kais</option>
+                          <option value="Cheliya | 55">Cheliya</option>
+                          <option value="Oran | 720">Metirchou</option>
+                          <option value="gherdaya | 120">Gherdaya</option>
+                          <option value="jijel | 370">Jijel</option>
+                          <option value="Bejaya | 420">Bejaya</option>
+                          <option value="Elbaida | 51">Elbaida</option>
+                          <option value="tabrdga | 62">tabrdga</option>
+                          <option value="Fais | 55">Fais</option>
+                          <option value="Boulfrays | 62">Boulafrays</option>
+                          <option value="Elalma | 194">Elalma</option>
+                          <option value="Boulfrays | 62">Boulafrays</option>
+                          <option value="tabessa | 104">tabessa</option>
+                          <option value="Msila | 241">Msila</option>
+                          <option value="Constantine | 212">Boulafrays</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Date de depart :</label>
+                        <input size="16" id="id_date_depart" name="date_depart" type="datetime-local" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Date de retour :</label>
+                        <input size="16" id="id_date_retour" name="date_retour" type="datetime-local" required>
+                      </div>
+
+
+                      <div class="col-md-12">
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">FERMER</button>
+                          <button type="submit" name="addms" class="btn btn-outline-success addmsbt">AJOUTER</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- #################################################################################################################### -->
+        <div class="modal fade" id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation De La Mission</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- <form action="insertpersdb.php" method="POST"> -->
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <input type="hidden" name="id" id="cID">
+                    <div class="col-md-6">
+                      <label>Nom :</label>
+                      <input type="text" name="name" id="cNAME" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Prenom :</label>
+                      <input type="text" name="prenom" id="cSURN" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-9">
+                      <label>GRADE:</label>
+                      <input type="text" name="grade" id="cGRADE" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-3">
+                      <label>GRADE ID:</label>
+                      <input type="text" name="gradeid" id="cGRADE_id" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-9">
+                      <label>CCP N:</label>
+                      <input type="number" name="ccp" id="cCCP" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Clé :</label>
+                      <input type="number" name="key" id="cKEY" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-12">
+                      <label>Distination:</label>
+                      <input type="text" name="distination" id="cdisID" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Date de depart:</label>
+                      <input type="text" name="date_depart" id="cdate_depart" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Date de retour:</label>
+                      <input type="textD" name="date_retour" id="cdate_retour" class="form-control" readonly>
+                    </div>
+
+
+
+
+                    <div class="col-md-12">
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
+                        <button type="submit" name="Conf_addms" onclick="addmission()"
+                          class="btn btn-outline-success">Confirmer la
+                          mission</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </form> -->
+            </div>
+          </div>
+        </div>
+        <!-- #################################################################################################################### -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" name="save_1" data-toggle="modal" data-target="#adduser"> Ajouter
+          un employe</button>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="vendors/jquery-3.5.1.min.js"></script>
+  <script src="vendors/bootstrap.js"></script>
+  <script src="main.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.editbtn').on('click', function () {
+
+        $('#EDITUSER').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+          return $(this).text();
+        }).get();
+
+        console.log(data);
+
+        $('#fID').val(data[0]);
+        $('#fNAME').val(data[1]);
+        $('#fSURN').val(data[2]);
+        $("#grade_s").val(data[3]).attr('selected', 'selected');
+        $('#fgrade_id').val(data[4]);
+        $('#fCCP').val(data[5]);
+        $('#fKEY').val(data[6]);
+
+      });
+
+      var name;
+      var surname;
+      var grade;
+      var grade_id;
+      var ccp;
+      var key;
+      var id;
+      var distination;
+      var date_depart;
+      var date_retour;
+
+      $('.addmsbtn').on('click', function () {
+
+        $('#ADDMS').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function () {
+          return $(this).text();
+        }).get();
+
+        console.log(data);
+
+        $('#aID').val(data[0]);
+        id = data[0];
+        $('#aNAME').val(data[1]);
+        name = data[1];
+        $('#aSURN').val(data[2]);
+        prenom = data[2];
+        $('#aGRADE').val(data[3]);
+        grade = data[3];
+        $('#aGRADE_id').val(data[4]);
+        grade_id = data[4];
+        $('#aCCP').val(data[5]);
+        ccp = data[5];
+        $('#aKEY').val(data[6]);
+        key = data[6];
+
+
+      });
+
+      //     $('.addmsbt').on('click',function() {   
+
+      $("#submit-button").submit(function (e) {
+
+        distination = document.getElementById('disID').value;
+        date_depart = document.getElementById('id_date_depart').value;
+        date_retour = document.getElementById('id_date_retour').value;
+
+
+
+        $('#ADDMS').modal('hide');
+        $('#Confirmation').modal('show');
+        document.getElementById("cID").value = id;
+        document.getElementById("cNAME").value = name;
+        document.getElementById("cSURN").value = prenom;
+        document.getElementById("cGRADE").value = grade;
+        document.getElementById("cGRADE_id").value = grade_id;
+        document.getElementById("cCCP").value = ccp;
+        document.getElementById("cKEY").value = key;
+        document.getElementById("cdisID").value = distination + " km";
+        document.getElementById("cdate_depart").value = date_depart;
+        document.getElementById("cdate_retour").value = date_retour;
+
+
+        return false;
+      });
+
+
+
+    });
+  </script>
+
+  <script>
+    var http = new XMLHttpRequest()
+
+    function save() {
+      let name = $('input')[0].value
+      let prenom = $('input')[1].value
+      let grade_s = $('select')[0].value
+      let ccp = $('input')[2].value
+      let cle = $('input')[3].value
+
+
+      let obj = {
+        name,
+        prenom,
+        grade_s,
+        ccp,
+        cle
+      }
+
+      http.open('POST', '/save', true)
+      http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+
+      http.send(JSON.stringify(obj))
+
+      http.onload = function () {
+        location.reload()
+        // let el = http.response
+        // el = JSON.parse(el)
+        // el = el.obj
+        // $('#adduser').modal('hide');
+        // let tr = document.createElement('tr')
+        // let td = []
+        // let button = []
+        // for (let index = 0; index < 9; index++) {
+        //   td[index] = document.createElement('td')
+        // }
+        // for (let index = 0; index < 3; index++) {
+        //   button[index] = document.createElement('button')
+        // }
+        // let a = document.createElement('a')
+        // td[0].textContent = el.id
+        // td[1].textContent = el.name
+        // td[2].textContent = el.prenom
+        // td[3].textContent = el.grade_vc
+        // td[4].textContent = el.grade_int
+        // td[5].textContent = el.ccp
+        // td[6].textContent = el.cle
+        // button[0].setAttribute('type', 'button')
+        // button[0].setAttribute('name', 'add')
+        // button[0].setAttribute('id', 'addid')
+        // button[0].classList.add("btn", "btn-info", "editbtn")
+        // button[0].textContent = 'Edit'
+        // a.classList.add("btn", "btn-danger")
+        // a.textContent = 'Supprimer'
+        // a.setAttribute("style", "margin : 5px")
+        // button[1].classList.add("btn", "btn-outline-success", "addmsbtn")
+        // button[1].setAttribute('type', 'button')
+        // button[1].setAttribute('name', 'msadd')
+        // button[1].setAttribute('id', 'msaddid')
+        // button[1].textContent = 'Ajouter Mission'
+        // button[1].classList.add("btn", "btn-outline-success", "addmsbtn")
+        // button[2].setAttribute('type', 'button')
+        // button[2].setAttribute('name', 'tel')
+        // button[2].setAttribute('id', 'tel')
+        // button[2].textContent = 'Telecharger'
+        // button[2].classList.add("btn", "btn-outline-success")
+        // button[2].setAttribute("style", "margin : 5px")
+
+        // td[7].append(button[0])
+        // td[7].append(a)
+        // td[8].append(button[1])
+        // td[8].append(button[2])
+
+
+        // td.forEach(el => tr.append(el))
+
+        // if ($('table > tbody')[0] == undefined) {
+        //   var tbody = document.createElement('tbody')
+        //   $('table').append(tbody)
+        // }
+        // $('table > tbody')[0].append(tr)
+
+        // $('input')[0].value = ''
+        // $('input')[1].value = ''
+        // $('select')[0].value = ''
+        // $('input')[2].value = ''
+        // $('input')[3].value = ''
+
+      };
+
+      http.onerror = function () {
+        console.log('false')
+      };
+
+
+    }
+
+    function edit() {
+      let obj = {
+        id: $('input')[4].value,
+        nom: $('input')[5].value,
+        prenom: $('input')[6].value,
+        grade_vc: $('select')[1].value,
+        grade_int: $('input')[7].value,
+        ccp: $('input')[8].value,
+        cle: $('input')[9].value
+      }
+
+      http.open('POST', '/editper', true)
+      http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+
+      http.send(JSON.stringify(obj))
+
+      http.onload = function () {
+        let obj = http.response
+        obj = JSON.parse(obj)
+        obj = obj.obj
+        td = $('tr');
+        for (let i = 1; i < td.length; i++) {
+          if ((td[i].getElementsByTagName('td')[0].textContent) == obj.id) {
+            td[i].getElementsByTagName('td')[1].textContent = obj.nom
+            td[i].getElementsByTagName('td')[2].textContent = obj.prenom
+            td[i].getElementsByTagName('td')[3].textContent = obj.grade_vc
+            td[i].getElementsByTagName('td')[4].textContent = obj.grade_int
+            td[i].getElementsByTagName('td')[5].textContent = obj.ccp
+            td[i].getElementsByTagName('td')[6].textContent = obj.cle
+            i = td.length
+
+          }
+        }
+        $('#EDITUSER').modal('hide');
+
+
+      };
+
+      http.onerror = function () {
+        console.log('false')
+      };
+
+    }
+
+    function del(tr) {
+      td = $(tr).closest('tr')[0]
+      id = td.getElementsByTagName('td')[0].textContent
+      let obj = {
+        id
+      }
+
+      http.open('POST', '/delete', true)
+      http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+
+      http.send(JSON.stringify(obj))
+
+      http.onload = function () {
+        let obj = http.response
+        obj = JSON.parse(obj)
+        id = obj.id
+        td = $('tr');
+        for (let i = 1; i < td.length; i++) {
+          if ((td[i].getElementsByTagName('td')[0].textContent) == id) {
+            td[i].remove()
+            i = td.length
+
+          }
+        }
+
+
+      };
+
+      http.onerror = function () {
+        console.log('false')
+      };
+    }
+
+    function addmission() {
+
+
+      let obj = {
+        id: $('#cID').val(),
+        nom: $('input')[20].value,
+        prenom: $('input')[21].value,
+        grade_vc: $('input')[22].value,
+        grade_id: $('input')[23].value,
+        ccp: $('input')[24].value,
+        cle: $('input')[25].value,
+        destination: $('input')[26].value,
+        date_depart: $('input')[27].value,
+        date_retour: $('input')[28].value,
+
+      }
+
+      http.open('POST', '/addmission', true)
+      http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+
+      http.send(JSON.stringify(obj))
+
+      http.onload = function () {
+        $('#Confirmation').modal("hide")
+        $("select#disID").val(null)
+        $('input#id_date_depart').val("")
+        $('input#id_date_retour').val("")
+
+      }
+    }
+
+    function telecharger(tr) {
+      td = $(tr).closest('tr')[0]
+      id = td.getElementsByTagName('td')[0].textContent
+      let obj = {
+        id
+      }
+
+      http.open('POST', '/getfile', true)
+      http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+
+      http.send(JSON.stringify(obj))
+
+      http.onload = function () {
+        location.href = "/xlsx"
+      }
+
+    }
+  </script>
+
+
+</body>

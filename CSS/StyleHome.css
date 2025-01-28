@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&family=Patua+One&family=Rubik:wght@300&family=Sniglet&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+header,
+section {
+    overflow-x: hidden;
+}
+
+main,
+section {
+    overflow-x: hidden;
+}
+
+footer,
+section {
+    overflow-x: hidden;
+}
+
+
+:root {
+    --Single-font: "Sniglet", cursive;
+    --Rubik: "Rubik", cursive;
+    --Patua: "Patua One", cursive;
+    --Lobster: "Lobster", cursive;
+    --light-black: #2e2c2caf;
+    --bggradient: linear-gradient(to bottom,
+            #dd2476, #495374);
+    --light-gray: rgba(255, 255, 255, 0.877)
+}
+
+header a {
+    font-family: var(--Single-font);
+    font-size: 0.9em;
+    color: whitesmoke
+}
+
+
+header {
+    background: #dd2476;
+    background: var(--bggradient);
+    padding-bottom: 20px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+header .nav-item:last-child {
+    padding-right: 10.5em;
+}
+
+header .nav-item {
+    padding: 0.9em;
+}
+
+header .navbar-brand {
+    padding-left: 8em;
+}
+
+header .nav-link:hover {
+    color: black;
+}
+
+header .row .col-md-5 {
+    padding: 4.2vmin 1vmin;
+}
+
+header .row .col-md-7 {
+    padding: 22vmin 1vmin;
+    padding-bottom: 35vmin;
+    font-family: var(--Rubik);
+
+}
+
+header .row .col-md-7 #BtnPo {
+    padding-top: 30px;
+}
+
+header .row .col-md-7 .btn {
+    padding-left: 50px;
+    padding-right: 50;
+}
+
+header .row .col-md-5 img {
+    width: 90%;
+}
+
+header .container .col-md-7 h6 {
+    padding: 1vmin;
+    letter-spacing: 4px;
+}
+
+header .container .col-md-7 h1 {
+    font-size: 7vmin;
+    font-weight: bold;
+    padding: 0.1em 0em;
+}
+
+header .container .col-md-7 p {
+    padding: 1vmin 5vmin;
+}
+
+header .container .col-md-7 button {
+    border-radius: 30px;
+    font-weight: bold;
+
+}
+
+
+
+main .team-section .card-img-top {
+    width: 300px;
+}
+
+.section-1 {
+    padding: 20vmin 0;
+}
+
+#IMG2 {
+    opacity: 0.8;
+    width: 190%;
+
+    border-radius: 0.2em;
+}
+
+.section-1 .row .col-md-6:last-child {
+    position: relative;
+}
+
+.section-1 .row .col-md-6 .panel {
+    position: absolute;
+    top: 7vmin;
+    left: -7vmin;
+    background: white;
+    border-radius: 3px;
+    text-align: left;
+    padding: 13vmin 5vmin 20vmin 10vmin;
+    box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+    font-family: var(--Rubik);
+    z-index: 1;
+}
+
+.section-1 .row .col-md-6 .panel h1 {
+    font-weight: bold;
+    padding: 0.4em 0;
+    font-size: 2em;
+}
+
+.section-1 .row .col-md-6 .panel p {
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.content-box {
+    padding-top: 250px;
+    padding-bottom: 280px;
+    box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+}
+
+.content-box .container .row .box {
+    position: relative;
+    width: calc(400px - 30px);
+    height: calc(360px - 30px);
+    background: #000;
+    float: left;
+    margin: 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.content-box .container .row .box .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.content-box .container .row .box:hover .icon {
+    top: 20px;
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.content-box .container .row .box .icon .fa {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    transition: 0.5s;
+    color: #fff;
+}
+
+.content-box .container .row .box:hover .icon .fa {
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+
+.content-box .container .row .box .content {
+    position: absolute;
+    top: 100%;
+    margin-right: 15px;
+    height: calc(100%-100px);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.content-box .container .row .box:hover .content {
+    top: 100px;
+    opacity: 1;
+
+}
+
+.content-box .container .row .box .content h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.content-box .container .row .box .content p {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.content-box .container .row .box .content .btn {
+    margin-top: 5px;
+}
+
+.content-box .container .row .box:nth-child(1) .icon {
+    background: #319635;
+}
+
+.content-box .container .row .box:nth-child(1) {
+    background: #4caf50;
+}
+
+.content-box .container .row .box:nth-child(2) .icon {
+    background: #d03852;
+}
+
+.content-box .container .row .box:nth-child(2) {
+    background: #f54967;
+}
+
+.content-box .container .row .box:nth-child(3) .icon {
+    background: #23798e;
+}
+
+.content-box .container .row .box:nth-child(3) {
+    background: #328fa5;
+}
+
+.content-box .container {
+    padding-left: 30px;
+
+}
+
+.content-box {
+    background: #dd2476;
+    background: linear-gradient(to bottom,
+            #495374, #01060f);
+}
+
+/* Sticky class*/
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.815);
+    z-index: 9999;
+    transition: all 1.5s ease;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0);
+}
